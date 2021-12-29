@@ -34,6 +34,9 @@ module.exports = {
         app2: `app2@${
           isDev ? "[app2Url]" : process.env.remoteUrl
         }/remoteEntry.js`,
+        app3: `app3@${
+          isDev ? "[app3Url]" : process.env.remoteUrl1
+        }/remoteEntry.js`,
       },
       shared: { react: { singleton: true }, "react-dom": { singleton: true } },
     }),
