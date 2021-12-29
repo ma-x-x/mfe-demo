@@ -13,7 +13,7 @@ module.exports = {
     port: 3001,
   },
   output: {
-    publicPath: isDev ? "http://localhost:3001/" : process.env.hostUrl,
+    publicPath: "auto",
   },
   module: {
     rules: [
