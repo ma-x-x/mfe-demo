@@ -3,6 +3,8 @@ const { ModuleFederationPlugin } = require("webpack").container;
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const path = require("path");
 
+const isDev = process.env.NODE_ENV === "development";
+
 module.exports = {
   entry: "./src/index",
   mode: "development",
@@ -11,10 +13,7 @@ module.exports = {
     port: 3001,
   },
   output: {
-    publicPath:
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3001/"
-        : process.env.hostUrl,
+    publicPath: isDev ? "http://localhost:3001/" : process.env.hostUrl,
   },
   module: {
     rules: [
@@ -32,7 +31,9 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "app1",
       remotes: {
-        app2: `app2@${process.env.remoteUrl}/remoteEntry.js`,
+        app2: `app2@${
+          isDev ? "[app2Url]" : process.env.remoteUrl
+        }/remoteEntry.js`,
       },
       shared: { react: { singleton: true }, "react-dom": { singleton: true } },
     }),

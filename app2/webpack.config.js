@@ -2,6 +2,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const path = require("path");
 
+const isDev = process.env.NODE_ENV === "development";
+
 module.exports = {
   entry: "./src/index",
   devServer: {
@@ -9,10 +11,7 @@ module.exports = {
     port: 3002,
   },
   output: {
-    publicPath:
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3002/"
-        : process.env.hostUrl,
+    publicPath: isDev ? "http://localhost:3002/" : process.env.hostUrl,
   },
   module: {
     rules: [
