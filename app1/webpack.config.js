@@ -1,5 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const {ModuleFederationPlugin} = require("webpack").container;
+const { ModuleFederationPlugin } = require("webpack").container;
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const path = require("path");
 
@@ -11,7 +11,10 @@ module.exports = {
     port: 3001,
   },
   output: {
-    publicPath: "auto",
+    publicPath:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3001/"
+        : process.env.hostUrl,
   },
   module: {
     rules: [
@@ -29,9 +32,9 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "app1",
       remotes: {
-        app2: "app2@[app2Url]/remoteEntry.js",
+        app2: `app2@${process.env.remoteUrl}/remoteEntry.js`,
       },
-      shared: {react: {singleton: true}, "react-dom": {singleton: true}},
+      shared: { react: { singleton: true }, "react-dom": { singleton: true } },
     }),
     new ExternalTemplateRemotesPlugin(),
     new HtmlWebpackPlugin({
@@ -39,4 +42,3 @@ module.exports = {
     }),
   ],
 };
-
