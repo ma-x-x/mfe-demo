@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { HashRouter, Routes, Route, Link } from "react-router-dom";
 const RemoteApp2 = React.lazy(() => import("app2/App"));
 const RemoteApp3 = React.lazy(() => import("app3/App"));
 
@@ -18,7 +18,7 @@ const Home = () => (
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div>
         <div
           style={{
@@ -44,6 +44,8 @@ const App = () => {
             <Route path='/' element={<Home />} />
             <Route
               path='/app2'
+              exact={false}
+              strict={false}
               element={
                 <Suspense fallback='loading'>
                   <RemoteApp2 />
@@ -52,6 +54,8 @@ const App = () => {
             />
             <Route
               path='/app3'
+              exact={false}
+              strict={false}
               element={
                 <Suspense fallback='loading'>
                   <RemoteApp3 />
@@ -64,7 +68,7 @@ const App = () => {
           <RemoteApp />
         </Suspense> */}
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
