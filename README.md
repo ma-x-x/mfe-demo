@@ -13,7 +13,4 @@ Both `app1` and `app2` are independently deployed apps:
 
 - `app1`: http://localhost:3001
 - `app2`: http://localhost:3002
-
-Check out this link below for more examples:
-
-[https://github.com/module-federation/module-federation-examples](https://github.com/module-federation/module-federation-examples)
+- `app3`: http://localhost:3003
